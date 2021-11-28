@@ -26,7 +26,7 @@ class AuditApplicationTests {
     private final ApplicationContext context;
 
     @Autowired
-    public AuditApplicationTests(ResourceLoader resourceLoader, JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
+    public AuditApplicationTests(JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
         this.jdbcTemplate = jdbcTemplate;
         this.documentService = documentService;
         this.context = context;
