@@ -29,7 +29,7 @@ class HibernateEnversTests {
     private final String SELECT_ALL_FROM_STATUS_AUD = "SELECT * FROM status_aud";
 
     @Autowired
-    public HibernateEnversTests(ResourceLoader resourceLoader, JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
+    public HibernateEnversTests(JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
         this.jdbcTemplate = jdbcTemplate;
         this.documentService = documentService;
         this.context = context;
@@ -83,7 +83,7 @@ class HibernateEnversTests {
 
         var newNumberOfRows = rowHandler.getRowCount();
 
-        log.info("Status_Aud contains now" + newNumberOfRows);
+        log.info("Status_Aud contains now " + newNumberOfRows);
 
         assertTrue(oldNumberOfRows != newNumberOfRows);
     }
