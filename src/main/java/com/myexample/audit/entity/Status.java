@@ -1,19 +1,17 @@
 package com.myexample.audit.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.hibernate.envers.AuditOverride;
+import lombok.*;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Audited
-@AuditOverride(forClass = Auditable.class)
 @Entity
 @Table
-@Data
+@Getter
+@Setter
+@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
