@@ -27,7 +27,7 @@ class AuditingEntityListenerTests {
     private final String FIRST_DOCUMENT_TYPE = "1";
 
     @Autowired
-    public AuditingEntityListenerTests(ResourceLoader resourceLoader, JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
+    public AuditingEntityListenerTests(JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
         this.jdbcTemplate = jdbcTemplate;
         this.documentService = documentService;
         this.context = context;
