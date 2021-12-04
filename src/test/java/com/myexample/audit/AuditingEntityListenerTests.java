@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.IOException;
@@ -27,7 +26,7 @@ class AuditingEntityListenerTests {
     private final String FIRST_DOCUMENT_TYPE = "1";
 
     @Autowired
-    public AuditingEntityListenerTests(ResourceLoader resourceLoader, JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
+    public AuditingEntityListenerTests(JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
         this.jdbcTemplate = jdbcTemplate;
         this.documentService = documentService;
         this.context = context;
@@ -61,7 +60,7 @@ class AuditingEntityListenerTests {
             .status(status)
             .build();
 
-        var savedStatus = documentService.createDocumentOrUpdate(document).getStatus();
+        var savedStatus = documentService.save(document).getStatus();
 
         assertNotNull(savedStatus.getCreatedAt());
         assertNotNull(savedStatus.getUpdatedAt());
@@ -71,12 +70,13 @@ class AuditingEntityListenerTests {
     void updateDocument() {
         var document = documentService.findByType(FIRST_DOCUMENT_TYPE).get(0);
         var status = document.getStatus();
-        status.setVerified(false);
+        var verified = !status.getVerified();
+        status.setVerified(verified);
 
-        var savedDocument = documentService.createDocumentOrUpdate(document);
+        var savedDocument = documentService.save(document);
         var savedStatus = savedDocument.getStatus();
 
-        assertFalse(savedStatus.getVerified());
+        assertEquals(savedStatus.getVerified(), verified);
         assertNotSame(savedStatus.getUpdatedAt(), status.getUpdatedAt());
         assertSame(savedStatus.getCreatedAt(), status.getCreatedAt());
     }

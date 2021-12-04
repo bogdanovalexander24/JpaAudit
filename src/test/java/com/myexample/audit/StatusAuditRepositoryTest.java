@@ -44,7 +44,7 @@ class StatusAuditRepositoryTest {
             .status(status)
             .build();
 
-        var savedStatus = documentService.createDocumentOrUpdate(document).getStatus();
+        var savedStatus = documentService.save(document).getStatus();
 
         var result = statusAuditRepository.findAllById(savedStatus.getId());
 

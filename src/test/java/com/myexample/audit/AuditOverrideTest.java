@@ -64,7 +64,7 @@ class AuditOverrideTest {
             .status(status)
             .build();
 
-        var savedStatusId = documentService.createDocumentOrUpdate(document).getStatus().getId();
+        var savedStatusId = documentService.save(document).getStatus().getId();
 
         var statusAuds = statusAuditRepository.findAllById(savedStatusId);
 

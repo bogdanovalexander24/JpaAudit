@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ class AuditApplicationTests {
     private final ApplicationContext context;
 
     @Autowired
-    public AuditApplicationTests(ResourceLoader resourceLoader, JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
+    public AuditApplicationTests(JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
         this.jdbcTemplate = jdbcTemplate;
         this.documentService = documentService;
         this.context = context;
@@ -69,7 +68,7 @@ class AuditApplicationTests {
             .status(status)
             .build();
 
-        var id = documentService.createDocumentOrUpdate(document).getId();
+        var id = documentService.save(document).getId();
 
         assertNotNull(id);
     }

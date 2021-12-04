@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.ResourceLoader;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCountCallbackHandler;
 
@@ -29,7 +28,7 @@ class HibernateEnversTests {
     private final String SELECT_ALL_FROM_STATUS_AUD = "SELECT * FROM status_aud";
 
     @Autowired
-    public HibernateEnversTests(ResourceLoader resourceLoader, JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
+    public HibernateEnversTests(JdbcTemplate jdbcTemplate, DocumentService documentService, ApplicationContext context) {
         this.jdbcTemplate = jdbcTemplate;
         this.documentService = documentService;
         this.context = context;
@@ -75,7 +74,7 @@ class HibernateEnversTests {
 
         log.info("Status_Aud contains before " + oldNumberOfRows);
 
-        var savedStatus = documentService.createDocumentOrUpdate(document).getStatus();
+        var savedStatus = documentService.save(document).getStatus();
 
         rowHandler = new RowCountCallbackHandler();
 
