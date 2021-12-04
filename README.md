@@ -5,4 +5,4 @@ Project for showing how to configure JPA Auditing:
 * Entity Listener + Hibernate Envers 
 
 Additional:
-Geting history using Repository
+Getting history using Repository
