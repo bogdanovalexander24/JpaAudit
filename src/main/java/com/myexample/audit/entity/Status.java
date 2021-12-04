@@ -2,14 +2,10 @@ package com.myexample.audit.entity;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.envers.AuditOverride;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@Audited
-@AuditOverride(forClass = Auditable.class)
 @Entity
 @Table
 @Getter
@@ -18,7 +14,7 @@ import java.util.Objects;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Status extends Auditable {
+public class Status {
     @Id
     @GeneratedValue
     @Column

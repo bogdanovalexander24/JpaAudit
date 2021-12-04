@@ -49,35 +49,35 @@ class AuditingEntityListenerTests {
         log.info("finish init tables");
     }
 
-    @Test
-    void saveDocument() {
-        var status = Status.builder()
-            .updateBy("Jhon")
-            .verified(true)
-            .build();
-        var document = Document.builder()
-            .type(FIRST_DOCUMENT_TYPE)
-            .status(status)
-            .build();
-
-        var savedStatus = documentService.save(document).getStatus();
-
-        assertNotNull(savedStatus.getCreatedAt());
-        assertNotNull(savedStatus.getUpdatedAt());
-    }
-
-    @Test
-    void updateDocument() {
-        var document = documentService.findByType(FIRST_DOCUMENT_TYPE).get(0);
-        var status = document.getStatus();
-        var verified = !status.getVerified();
-        status.setVerified(verified);
-
-        var savedDocument = documentService.save(document);
-        var savedStatus = savedDocument.getStatus();
-
-        assertEquals(savedStatus.getVerified(), verified);
-        assertNotSame(savedStatus.getUpdatedAt(), status.getUpdatedAt());
-        assertSame(savedStatus.getCreatedAt(), status.getCreatedAt());
-    }
+//    @Test
+//    void saveDocument() {
+//        var status = Status.builder()
+//            .updateBy("Jhon")
+//            .verified(true)
+//            .build();
+//        var document = Document.builder()
+//            .type(FIRST_DOCUMENT_TYPE)
+//            .status(status)
+//            .build();
+//
+//        var savedStatus = documentService.save(document).getStatus();
+//
+//        assertNotNull(savedStatus.getCreatedAt());
+//        assertNotNull(savedStatus.getUpdatedAt());
+//    }
+//
+//    @Test
+//    void updateDocument() {
+//        var document = documentService.findByType(FIRST_DOCUMENT_TYPE).get(0);
+//        var status = document.getStatus();
+//        var verified = !status.getVerified();
+//        status.setVerified(verified);
+//
+//        var savedDocument = documentService.save(document);
+//        var savedStatus = savedDocument.getStatus();
+//
+//        assertEquals(savedStatus.getVerified(), verified);
+//        assertNotSame(savedStatus.getUpdatedAt(), status.getUpdatedAt());
+//        assertSame(savedStatus.getCreatedAt(), status.getCreatedAt());
+//    }
 }
