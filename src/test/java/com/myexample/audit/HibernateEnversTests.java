@@ -82,7 +82,7 @@ class HibernateEnversTests {
 
         var newNumberOfRows = rowHandler.getRowCount();
 
-        log.info("Status_Aud contains now" + newNumberOfRows);
+        log.info("Status_Aud contains now " + newNumberOfRows);
 
         assertTrue(oldNumberOfRows != newNumberOfRows);
     }
